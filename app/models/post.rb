@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   has_many :comments
+  belongs_to :user
 
   # validates :source, format: { with: / \Ahttp:\/\/\w{3,}\.\w+\..{2,} }
   validates :title, presence: true, length: { in: 3..75 }
@@ -8,6 +9,6 @@ class Post < ApplicationRecord
   private
 
   def body_word_count
-    body.scan(/w+/)
+    body&.scan(/w+/)
   end
 end
